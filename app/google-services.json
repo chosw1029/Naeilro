@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "180531701199",
+    "firebase_url": "https://naeilroproject-99b0c.firebaseio.com",
+    "project_id": "naeilroproject-99b0c",
+    "storage_bucket": "naeilroproject-99b0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180531701199:android:35ab35f9cca6056f",
+        "android_client_info": {
+          "package_name": "nextus.naeilro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180531701199-gkrhmuo2s1276c6lftbl84m05ilr1ias.apps.googleusercontent.com",
+          "client_type": 1
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOHsTtlY6w_3xi8HYkVisGCWGYmEZwLWg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180531701199-th0ulj646d89nl7k72bijkrstsqc1u4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="nextus.naeilro.viewmodel.TrainStationListVM"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/activity_train_station_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context="nextus.naeilro.view.TrainStationListActivity">
+
+        <EditText
+            android:hint="검색"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:addTextChangedListener="@{viewModel.watcher}"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trainStationRecycler"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</layout>
+

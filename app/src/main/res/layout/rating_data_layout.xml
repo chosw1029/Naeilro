@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="nextus.naeilro.viewmodel.ObjectInfoVM"/>
+    </data>
+
+    <!-- Review Layout Start -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+            <com.beardedhen.androidbootstrap.BootstrapLabel
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bootstrapBrand="warning"
+                app:fontAwesomeIcon="fa_star"/>
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:text="리뷰"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="@{viewModel.locationValueString}"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RatingBar
+                    android:rating="@{viewModel.locationValueDouble}"
+                    android:max="5"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/ratingBarStyleSmall"/>
+                <TextView
+                    android:text="@{viewModel.locationRcountString}"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Review Layout End -->
+
+</layout>

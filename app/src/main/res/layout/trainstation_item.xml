@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="nextus.naeilro.viewmodel.TrainStationListVM"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/placeHolder"
+        android:background="@color/bootstrap_gray_lighter"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="@{viewModel::onClick}">
+        <TextView
+            android:text="@{viewModel.stationName}"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</layout>

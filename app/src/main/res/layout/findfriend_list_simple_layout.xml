@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="nextus.naeilro.viewmodel.MainVM"/>
+    </data>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/placeHolder"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{viewModel::onClick}">
+        <TextView
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/my_school_title_05"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/comment_count"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:gravity="right"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">내일로의 모든것</string>
+
+    <string name="action_search">검색</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec condimentum ante, quis mattis mi. Proin ut rhoncus libero, ac euismod neque. Ut suscipit, enim a facilisis consequat, orci lacus venenatis orci, at ultricies orci nulla sed ex. In condimentum viverra velit, eget feugiat libero imperdiet vel. Aenean pretium, lectus vitae bibendum bibendum, diam turpis convallis eros, quis tristique leo sapien at ipsum. Praesent eu odio id nulla lobortis auctor. Donec eget dolor eget nisl euismod commodo vel a lacus. Quisque ut justo vitae urna pharetra accumsan. Etiam dignissim neque iaculis mauris viverra, blandit rhoncus odio porttitor. Phasellus nibh arcu.</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main_temp">MainActivityTemp</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_station_info">StationInfoActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="facebook_app_id">1120002238077259</string>
+    <string name="daum_map_api">36edc4a1bd3cd16ebc8d78676d556dbf</string>
+    <string name="server_client_id">180531701199-gkrhmuo2s1276c6lftbl84m05ilr1ias.apps.googleusercontent.com</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3193127825195988/1210569150</string>
+
+    <string name="visitkorea_api">g3dz5EiDpV099P4nVTKJEk0tBbGp0IyE2Td4fVIlwt8YV6ULFpcSaFpV4dJ%2Bs32d35ry0yzj0XmAzZp49jk2KQ%3D%3D</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

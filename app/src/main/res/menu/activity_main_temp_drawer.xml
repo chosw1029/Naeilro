@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="기본 사항">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/ic_mypage_black_24dp"
+                android:title="마이페이지" />
+
+        </menu>
+    </item>
+    <item android:title="기능">
+        <menu>
+            <item
+                android:id="@+id/station_info"
+                android:icon="@drawable/ic_travelblack_24dp"
+                android:title="여행지 정보" />
+            <item
+                android:id="@+id/find_train"
+                android:icon="@drawable/ic_train_black_24dp"
+                android:title="열차 정보" />
+            <item
+                android:id="@+id/find_friend"
+                android:icon="@drawable/ic_people_black_24dp"
+                android:title="내모 게시판" />
+        </menu>
+    </item>
+    <item android:title="정보">
+        <menu>
+            <item
+                android:id="@+id/naeilro_info"
+                android:icon="@drawable/ic_info_black_24dp"
+                android:title="내일로란?" />
+        </menu>
+    </item>
+</menu>

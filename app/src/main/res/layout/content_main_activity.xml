@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="nextus.naeilro.viewmodel.MainVM"/>
+    </data>
+
+    <FrameLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        tools:context="nextus.naeilro.view.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/content_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="#ffffff"
+                    android:paddingLeft="16dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EVENT"
+                        app:showOutline="true"
+                        app:bootstrapBrand="danger"
+                        app:roundedCorners="true"
+                        app:bootstrapSize="sm"/>
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:text="내일로의 모든 것 모바일 어플이 출시되었습니다."
+                        android:textSize="13sp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="#ffffff"
+                    android:paddingLeft="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+                    <com.beardedhen.androidbootstrap.BootstrapButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NOTICE"
+                        app:showOutline="true"
+                        app:bootstrapBrand="info"
+                        app:roundedCorners="true"
+                        app:bootstrapSize="sm"/>
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:text="내일로의 모든 것 모바일 어플이 출시되었습니다."
+                        android:textSize="13sp"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp" />
+                        <com.viewpagerindicator.CirclePageIndicator
+                            android:id="@+id/indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            app:fillColor="@color/colorAccent"/>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="#ffffff"
+                    android:layout_marginTop="4dp"
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+                        <com.beardedhen.androidbootstrap.BootstrapButton
+                            android:id="@+id/bb_00"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="10sp"
+                            android:text="메뉴"
+                            app:showOutline="true"
+                            app:roundedCorners="true"
+                            app:bootstrapSize="xs"/>
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_toRightOf="@id/bb_00"
+                            android:layout_marginLeft="16dp"
+                            android:text="인기장소"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <FrameLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                                android:id="@+id/best01"
+                                android:onClick="@{viewModel::onClick}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hasBorder="false"/>
+                            <TextView
+                                android:id="@+id/best01_name"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="#ffffff"
+                                android:background="#252525"
+                                android:padding="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                                android:id="@+id/best02"
+                                android:onClick="@{viewModel::onClick}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hasBorder="false"/>
+                            <TextView
+                                android:id="@+id/best02_name"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="#ffffff"
+                                android:background="#252525"
+                                android:padding="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                                android:id="@+id/best03"
+                                android:onClick="@{viewModel::onClick}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hasBorder="false"/>
+                            <TextView
+                                android:id="@+id/best03_name"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="#ffffff"
+                                android:background="#252525"
+                                android:padding="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+                                android:id="@+id/best04"
+                                android:onClick="@{viewModel::onClick}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hasBorder="false"/>
+                            <TextView
+                                android:id="@+id/best04_name"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="#ffffff"
+                                android:background="#252525"
+                                android:padding="2dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </FrameLayout>
+                    </LinearLayout>
+                    <!-- 내모인 모집 End -->
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/stationInfo"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:onClick="@{viewModel::onClick}">
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@drawable/station_temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="내일로 여행지 정보"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="#80000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/infoNaeilro"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:onClick="@{viewModel::onClick}">
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@drawable/tit_img_rail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="내일로가 궁금하면 클릭!!"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:background="#80000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="@string/banner_ad_unit_id">
+                </com.google.android.gms.ads.AdView>
+                <!-- 내모인 모집 Start -->
+                <LinearLayout
+                    android:background="#ffffff"
+                    android:layout_marginTop="4dp"
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+                        <com.beardedhen.androidbootstrap.BootstrapButton
+                            android:id="@+id/bb_01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="10sp"
+                            android:text="내모인"
+                            app:showOutline="true"
+                            app:roundedCorners="true"
+                            app:bootstrapSize="xs"/>
+                        <TextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_toRightOf="@id/bb_01"
+                            android:layout_marginLeft="16dp"
+                            android:text="내모 리뷰"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                        <com.beardedhen.androidbootstrap.BootstrapButton
+                            android:id="@+id/test"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="10sp"
+                            android:layout_alignParentRight="true"
+                            android:text="더보기"
+                            android:onClick="@{viewModel::onClick}"
+                            app:bootstrapBrand="info"
+                            app:roundedCorners="true"
+                            app:bootstrapSize="xs"/>
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/reviewRecycler"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <!-- 내모인 모집 End -->
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </FrameLayout>
+
+</layout>
+

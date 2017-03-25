@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_01"
+        icon="@drawable/ic_chrome_reader_mode_black_24dp"
+        title="채널" />
+    <tab
+        id="@+id/tab_02"
+        icon="@drawable/ic_search_black_24dp"
+        title="검색" />
+    <tab
+        id="@+id/tab_03"
+        icon="@drawable/ic_train_black_24dp"
+        title="열차정보" />
+    <tab
+        id="@+id/tab_04"
+        icon="@drawable/ic_people_black_24dp"
+        title="내모인" />
+    <tab
+        id="@+id/tab_05"
+        icon="@drawable/ic_more_horiz_black_24dp"
+        title="더보기" />
+</tabs>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_main_temp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:contentInsetStart="0dp"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp">
+                        <ImageView
+                            android:id="@+id/backButton"
+                            android:src="@drawable/ic_train_black_24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:text="내일로의 모든것"
+                            android:layout_marginStart="16dp"
+                            android:gravity="center_vertical"
+                            android:textAppearance="@style/Toolbar.TitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <View
+                        android:background="@drawable/gradation_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:id="@+id/container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            app:bb_activeTabColor="@color/colorAccent"
+            app:bb_behavior="shy"
+            app:bb_tabXmlResource="@xml/bottombar_tabs" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

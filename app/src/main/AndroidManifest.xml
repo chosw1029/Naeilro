@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nextus.naeilro">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.IntroductionActivity" />
+        <activity
+            android:name=".view.StationListActivity"
+            android:label="여행지 정보"
+            android:parentActivityName=".view.MainActivity"
+            android:theme="@style/AppTheme.NoActionBarCustom" />
+        <activity
+            android:name=".view.BoardActivity"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".view.StationInfoActivity"
+            android:parentActivityName=".view.StationListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nextus.naeilro.view.StationListActivity" />
+        </activity>
+        <activity android:name=".view.ObjectInfoActivity" />
+        <activity android:name=".view.ObjectInfoActivityTemp" />
+        <activity
+            android:name=".view.FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:parentActivityName=".view.MainActivity"
+            android:theme="@style/FullscreenTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nextus.naeilro.view.MainActivity" />
+        </activity>
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.WebViewActivity" />
+        <activity
+            android:name=".view.MyPageActivity"
+            android:parentActivityName=".view.MainActivity" />
+        <activity android:name=".view.TestActivity" />
+        <activity android:name=".view.ReviewActivity" />
+        <activity
+            android:name=".view.SmallWebViewActivity"
+            android:theme="@style/dialogActivity" />
+        <activity android:name=".view.UserInfoSettingActivity" />
+        <activity
+            android:name=".view.EventPageActivity"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".view.TrainInfoActivity"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".view.TrainStationListActivity"
+            android:theme="@style/dialogActivity" />
+        <activity android:name=".view.BoardItemInfoActivity" />
+        <activity
+            android:name=".view.CreateBoardActivity"
+            android:theme="@style/dialogActivity" />
+    </application>
+
+</manifest>

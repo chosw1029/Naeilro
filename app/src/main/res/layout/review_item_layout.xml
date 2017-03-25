@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="nextus.naeilro.viewmodel.ReviewItemVM"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/placeHolder"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:imageUrl="@{viewModel.imageUrl}"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:text="@{viewModel.userName}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="@{viewModel.date}"
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/removeButton"
+                            android:text="삭제"
+                            android:visibility="@{viewModel.amI ? View.VISIBLE : View.GONE}"
+                            android:textColor="@color/colorAccent"
+                            android:layout_gravity="end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:onClick="@{viewModel::onRemove}"/>
+                    </FrameLayout>
+
+                </LinearLayout>
+                <RatingBar
+                    android:rating="@{viewModel.value}"
+                    android:max="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/ratingBarStyleSmall"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:text="@{viewModel.msg}"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>
