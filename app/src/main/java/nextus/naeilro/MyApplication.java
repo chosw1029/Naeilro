@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.multidex.MultiDex;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.google.firebase.FirebaseApp;
@@ -126,6 +127,6 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context newBase) {
         //super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
         super.attachBaseContext(newBase);
-        //MultiDex.install(this);
+        MultiDex.install(this);
     }
 }

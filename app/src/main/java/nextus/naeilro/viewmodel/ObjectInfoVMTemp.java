@@ -19,6 +19,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.skp.Tmap.TMapView;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -53,13 +54,13 @@ import static android.content.ContentValues.TAG;
  * Created by chosw on 2016-11-30.
  */
 
-public class ObjectInfoVMTemp extends BaseObservable implements MapView.MapViewEventListener{
+public class ObjectInfoVMTemp extends BaseObservable{
 
     private Subscription subscription;
     private Context context;
     private ItemDetail itemDetail;
     private Item item;
-    private MapView mapView;
+    private TMapView mapView;
     private DataListener dataListener;
     private List<OpenGraphData> blogData = new ArrayList<>();
     private List<Blog> blogList = new ArrayList<>();
@@ -75,7 +76,7 @@ public class ObjectInfoVMTemp extends BaseObservable implements MapView.MapViewE
         this.contentID = contentID;
         this.item = item;
         loadDetailData();
-        mapView = new MapView(context);
+        mapView = new TMapView(context);
 
     }
 
@@ -86,9 +87,17 @@ public class ObjectInfoVMTemp extends BaseObservable implements MapView.MapViewE
 
     public void settingMap()
     {
-        mapView.setDaumMapApiKey(context.getString(R.string.daum_map_api));
+        mapView.setSKPMapApiKey("52cb34c5-1d3b-3373-af4d-2604f83b6508");
+        mapView.setLanguage(TMapView.LANGUAGE_KOREAN);
+        mapView.setIconVisibility(true);
+        mapView.setZoomLevel(17);
+        mapView.setMapType(TMapView.MAPTYPE_STANDARD);
+        mapView.setCompassMode(true);
+        mapView.setTrackingMode(true);
+        mapView.setLocationPoint(Double.parseDouble(item.getMapx()), Double.parseDouble(item.getMapy()));
+        mapView.setCenterPoint(Double.parseDouble(item.getMapx()), Double.parseDouble(item.getMapy()));
+        Log.e("Mapy : ", ""+Double.parseDouble(item.getMapy()));
         ((ObjectInfoActivityTemp)context).binding.objectInfo.mapViewCon.addView(mapView);
-        mapView.setMapViewEventListener(this);
     }
 
     public void loadDetailData()
@@ -182,64 +191,6 @@ public class ObjectInfoVMTemp extends BaseObservable implements MapView.MapViewE
             return itemDetail.getTel();
         else
             return "";
-    }
-
-    @Override
-    public void onMapViewInitialized(MapView mapView) {
-
-        MapPoint CUSTOM_MARKER_POINT = MapPoint.mapPointWithGeoCoord(Double.parseDouble(item.getMapy()), Double.parseDouble(item.getMapx()));
-
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName(item.getTitle());
-        marker.setDraggable(false);
-        marker.setTag(0);
-        marker.setMapPoint(CUSTOM_MARKER_POINT);
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-
-        mapView.addPOIItem(marker);
-        mapView.setMapCenterPointAndZoomLevel(CUSTOM_MARKER_POINT, 3, false);
-
-    }
-
-    @Override
-    public void onMapViewCenterPointMoved(MapView mapView, MapPoint mapPoint) {
-
-    }
-
-    @Override
-    public void onMapViewZoomLevelChanged(MapView mapView, int i) {
-
-    }
-
-    @Override
-    public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
-
-    }
-
-    @Override
-    public void onMapViewDoubleTapped(MapView mapView, MapPoint mapPoint) {
-
-    }
-
-    @Override
-    public void onMapViewLongPressed(MapView mapView, MapPoint mapPoint) {
-
-    }
-
-    @Override
-    public void onMapViewDragStarted(MapView mapView, MapPoint mapPoint) {
-
-    }
-
-    @Override
-    public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
-
-    }
-
-    @Override
-    public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
-
     }
 
     public void onDestroy()
