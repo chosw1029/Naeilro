@@ -11,7 +11,6 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.tsengvn.typekit.Typekit;
 
 import nextus.naeilro.model.Location;
 import nextus.naeilro.utils.ContentService;
@@ -42,9 +41,6 @@ public class MyApplication extends Application {
         instance = this;
         //AppEventsLogger.activateApp(this);
         TypefaceProvider.registerDefaultIconSets();
-        Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "fonts/NanumSquareR.otf"))
-                .addBold(Typekit.createFromAsset(this, "fonts/NanumSquareB.otf"));
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReferenceFromUrl("gs://naeilroproject-99b0c.appspot.com");

@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import com.tsengvn.typekit.TypekitContextWrapper;
-
 import nextus.naeilro.MyApplication;
 
 /**
@@ -39,11 +37,6 @@ public class BaseActivity extends AppCompatActivity {
         if (currActivity != null && currActivity.equals(this)) {
             MyApplication.setCurrentActivity(null);
         }
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
 }
