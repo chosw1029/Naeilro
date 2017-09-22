@@ -13,16 +13,8 @@
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:text="로그인이 필요한 서비스입니다."
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <com.google.android.gms.common.SignInButton
+            <com.kakao.usermgmt.LoginButton
                 android:id="@+id/sign_in_button"
-                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

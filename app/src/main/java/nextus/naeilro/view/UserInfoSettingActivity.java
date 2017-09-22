@@ -17,9 +17,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.util.helper.log.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import nextus.naeilro.R;
 import nextus.naeilro.model.User;
+
 
 public class UserInfoSettingActivity extends AppCompatActivity {
 
@@ -69,4 +76,7 @@ public class UserInfoSettingActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
+
+
+
 }

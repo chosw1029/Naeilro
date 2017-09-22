@@ -61,7 +61,7 @@ dependencies {
     compile "com.google.firebase:firebase-ads:$FIREBASE"
     compile "com.google.android.gms:play-services-auth:$FIREBASE"
     compile "com.google.android.gms:play-services-maps:$FIREBASE"
-    compile 'com.firebaseui:firebase-ui-database:1.0.0'
+    compile 'com.firebaseui:firebase-ui-database:2.1.0'
     compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
@@ -85,12 +85,17 @@ dependencies {
     //compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     //compile 'io.reactivex.rxjava2:rxjava:2.0.1'
-    compile 'com.beardedhen:androidbootstrap:2.3.0'
+    compile 'com.beardedhen:androidbootstrap:2.3.2'
     compile 'com.github.wrdlbrnft:sorted-list-adapter:0.1.0.5'
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'org.sufficientlysecure:html-textview:3.1'
     compile 'org.jsoup:jsoup:1.9.2'
+
+    //kakao Login api
+    compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+
+
 
     //compile 'com.tsengvn:typekit:1.0.1'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'

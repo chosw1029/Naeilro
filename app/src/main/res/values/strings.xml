@@ -27,4 +27,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Kakao app key -->
+    <string name="kakao_app_key">3e10cd224ff4f2928cb85d2d0fc93e70</string>
 </resources>

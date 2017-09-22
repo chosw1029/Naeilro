@@ -12,7 +12,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.kakao.auth.KakaoSDK;
 
+import nextus.naeilro.adapter.KakaoSDKAdapter;
 import nextus.naeilro.model.Location;
 import nextus.naeilro.utils.ContentService;
 import rx.Scheduler;
@@ -41,6 +43,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         //AppEventsLogger.activateApp(this);
+        KakaoSDK.init(new KakaoSDKAdapter());
         TypefaceProvider.registerDefaultIconSets();
 
         storage = FirebaseStorage.getInstance();

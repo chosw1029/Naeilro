@@ -1,51 +1,50 @@
 package nextus.naeilro.view;
 
-import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Toast;
-
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.tbruyelle.rxpermissions.RxPermissions;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.util.exception.KakaoException;
+import com.kakao.util.helper.log.Logger;
 
 import nextus.naeilro.R;
 import nextus.naeilro.databinding.ActivityLoginBinding;
 import nextus.naeilro.model.User;
 
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by chosw on 2016-12-10.
  */
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
-    private GoogleApiClient mGoogleApiClient;
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
+
+    private SessionCallback callback;
 
     @Override
     public void onCreate(Bundle savedInstance)
@@ -61,18 +60,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             finish();
         }
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.server_client_id))
-                .requestEmail()
-                .build();
-
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = (firebaseAuth -> {
@@ -85,12 +72,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
            }
         });
 
-        binding.signInButton.setOnClickListener(this);
+        callback = new SessionCallback();
+        Session.getCurrentSession().addCallback(callback);
+        Session.getCurrentSession().checkAndImplicitOpen();
     }
 
-    private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+    private class SessionCallback implements ISessionCallback {
+
+        @Override
+        public void onSessionOpened() {
+            redirectSignupActivity();
+        }
+
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            if(exception != null) {
+                Logger.e(exception);
+            }
+        }
     }
 
     @MainThread
@@ -100,28 +99,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
         }
-    }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if(task.isSuccessful()) find();
-                    else {Toast.makeText(LoginActivity.this, "Sign In Failed",
-                            Toast.LENGTH_SHORT).show();}
-                });
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void find()
@@ -147,32 +130,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
+    protected void redirectSignupActivity() {
+        SharedPreferences prefs = getSharedPreferences("Access", MODE_PRIVATE);
+        //SharedPreferences.Editor editor = prefs.edit();
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        showSnackbar(connectionResult.getErrorCode());
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.sign_in_button:
-                RxPermissions rxPermissions = new RxPermissions(this);
-                rxPermissions
-                        .request(Manifest.permission.GET_ACCOUNTS)
-                        .subscribe(granted -> {
-                            if(granted) {
-                                signIn();
-                            }else {
-                                Toast.makeText(getApplicationContext(),
-                                        "권한이 필요합니다.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                break;
+        if(!prefs.getBoolean("Access",false)) // Access 성공한 적이 없는 경우
+        {
+            final Intent intent = new Intent(this, UserInfoSettingActivity.class);
+            startActivity(intent);
+            finish();
         }
+        else // 성공한 경우
+        {
+            final Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     @Override
@@ -189,4 +163,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
+    }
 }

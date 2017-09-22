@@ -30,14 +30,14 @@
             tools:context="nextus.naeilro.view.MyPageActivity">
 
             <FrameLayout
-                android:layout_marginBottom="32dp"
-                android:layout_marginTop="32dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="224dp">
                 <ImageView
-                    android:layout_width="128dp"
-                    android:layout_height="128dp"
+                    android:id="@+id/userPhoto"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:src="@drawable/ic_action_account_circle_40"/>
             </FrameLayout>
 
