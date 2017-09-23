@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.usermgmt.response.model.UserProfile;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import nextus.naeilro.MyApplication;
 import nextus.naeilro.R;
 import nextus.naeilro.model.Board;
 import nextus.naeilro.view.BoardActivity;
@@ -26,21 +29,31 @@ import nextus.naeilro.view.LoginActivity;
 
 public class BoardItemVM extends BaseObservable implements PopupMenu.OnMenuItemClickListener {
 
+    public static final int SEC = 60;
+    public static final int MIN = 60;
+    public static final int HOUR = 24;
+    public static final int DAY = 30;
+    public static final int MONTH = 12;
+
+    private UserProfile userProfile;
     private Board board;
     private Context context;
 
     public BoardItemVM(Context context)
     {
         this.context = context;
+        userProfile = UserProfile.loadFromCache();
+        MyApplication.getMyapplicationContext().requestAccessTokenInfo();
     }
 
     public void setBoard(Board board) { this.board = board; notifyChange();}
 
     public boolean getVisible()
     {
-        if(FirebaseAuth.getInstance().getCurrentUser() != null)
+        if(userProfile != null)
         {
-            return FirebaseAuth.getInstance().getCurrentUser().getUid().contentEquals(board.getUid());
+            String uid = ""+userProfile.getId();
+            return uid.contentEquals(board.getUid());
         }
         else
             return false;
@@ -55,41 +68,41 @@ public class BoardItemVM extends BaseObservable implements PopupMenu.OnMenuItemC
         String date = "";
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
-        Date current = new Date(System.currentTimeMillis());
 
-        try{
-            Date d = format.parse(date_string) ;
-            long time_long = current.getTime() - d.getTime();
-            int time = (int)time_long/1000;
+        long curTime = System.currentTimeMillis();
+        long regTime = 0;
 
-            if( time < 60 )
-            {
-                date = "방금";
-            }
-            else if( time >=60 && time < 3600 )
-            {
-                time = time/60;
-                date = ""+time+"분 전";
-            }
-            else if( time >=3600 && time < 86400 )
-            {
-                time = time/3600;
-                date = ""+time+"시간 전";
-            }
-            else if( time >= 86400 && time < 604800 )
-            {
-                time = time/86400;
-                date = ""+time+"일 전";
-            }
-            else
-            {
-                date = date_string;
-            }
-        }catch (Exception e)
-        {
+        try {
+            regTime = format.parse(date_string).getTime();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        return date;
+        long diffTime = (curTime - regTime) / 1000;
+
+        String msg = "";
+
+        if(diffTime < SEC) {
+            // sec
+            msg = diffTime + "초전";
+        } else if ((diffTime /= SEC) < MIN) {
+            // min
+            System.out.println(diffTime);
+            msg = diffTime + "분전";
+        } else if ((diffTime /= MIN) < HOUR) {
+            // hour
+            msg = (diffTime ) + "시간전";
+        } else if ((diffTime /= HOUR) < DAY) {
+            // day
+            if(diffTime < 8 )
+                msg = (diffTime ) + "일전";
+            else
+                msg = date_string;
+        } else {
+            msg = date_string;
+        }
+
+        return msg;
+
     }
 
     public void onClick(View view)
@@ -97,7 +110,7 @@ public class BoardItemVM extends BaseObservable implements PopupMenu.OnMenuItemC
         switch (view.getId())
         {
             case R.id.placeHolder:
-                if(FirebaseAuth.getInstance().getCurrentUser() == null)
+                if(!MyApplication.getMyapplicationContext().isLogin())
                 {
                     Snackbar snackbar = Snackbar.make(view, "로그인이 필요한 기능입니다. 로그인하시겠습니까?", Snackbar.LENGTH_LONG).setAction("OK", new View.OnClickListener() {
                         @Override

@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kakao.usermgmt.response.model.UserProfile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,6 +42,7 @@ import retrofit2.Response;
 
 public class BoardItemInfoVM {
 
+    private UserProfile userProfile;
     private Context context;
     private Board boardItem;
     private ObservableField<String> comment = new ObservableField<>();
@@ -52,6 +54,7 @@ public class BoardItemInfoVM {
     {
         this.context = context;
         this.boardItem = boardItem;
+        userProfile = UserProfile.loadFromCache();
     }
 
     public TextWatcher watcher = new TextWatcher() {
@@ -145,16 +148,16 @@ public class BoardItemInfoVM {
 
     public void insertData()
     {
-        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String userId = ""+userProfile.getId();
 
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get user value
-                User user = dataSnapshot.getValue(User.class);
+                //User user = dataSnapshot.getValue(User.class);
 
                 // [START_EXCLUDE]
-                if (user == null) {
+                if (userProfile == null) {
                     // User is null, error out
                     Log.e("BoardItemInfoVM", "User " + userId + " is unexpectedly null");
                     Toast.makeText(context,
@@ -162,7 +165,7 @@ public class BoardItemInfoVM {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     // Write new post
-                    writeReview(userId, user.username);
+                    writeReview(userId, userProfile.getNickname());
                 }
             }
 

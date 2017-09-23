@@ -3,15 +3,25 @@ package nextus.naeilro.view;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeResponseCallback;
+import com.kakao.usermgmt.response.model.UserProfile;
+import com.kakao.util.helper.log.Logger;
 
 import java.util.List;
 
+import nextus.naeilro.MyApplication;
 import nextus.naeilro.R;
 import nextus.naeilro.adapter.BoardListAdapter;
 import nextus.naeilro.databinding.ActivityFindFriendBinding;
@@ -31,6 +41,9 @@ public class BoardActivity extends BaseActivity implements FindFriendVM.DataList
         findFriendVM = new FindFriendVM(this);
         findFriendVM.setDataListener(this);
         findFriendVM.loadBoardData();
+
+        MyApplication.getMyapplicationContext().requestAccessTokenInfo();
+
         setSupportActionBar(binding.toolbar);
         setUpRecyclerView(binding.findfriendRecycler);
         binding.sendButton.setOnClickListener(this);
@@ -59,15 +72,24 @@ public class BoardActivity extends BaseActivity implements FindFriendVM.DataList
         switch(view.getId())
         {
             case R.id.sendButton:
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                if (auth.getCurrentUser() == null) {
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.anim_slide_in_up, R.anim.anim_default);
+                if(MyApplication.getMyapplicationContext().isLogin())
+                {
+                    startActivity(new Intent(BoardActivity.this, CreateBoardActivity.class));
                 }
                 else
                 {
-                    startActivity(new Intent(this, CreateBoardActivity.class));
+                    Log.e("onFailure", "failed to get user info : not login");
+
+                    Snackbar snackbar = Snackbar.make(view, "로그인이 필요한 기능입니다. 로그인하시겠습니까?", Snackbar.LENGTH_LONG).setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(BoardActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.anim_slide_in_up, R.anim.anim_default);
+                        }
+                    });
+                    snackbar.show();
+
                 }
 
                 break;
@@ -76,6 +98,7 @@ public class BoardActivity extends BaseActivity implements FindFriendVM.DataList
                 break;
         }
     }
+
 
     @Override
     public void onResume()

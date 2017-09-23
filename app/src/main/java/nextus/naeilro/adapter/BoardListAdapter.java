@@ -48,8 +48,6 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.Boar
     @Override
     public void onBindViewHolder(BoardItemViewHolder holder, int position) {
         holder.bindItem(boardList.get(position));
-
-
     }
 
     @Override

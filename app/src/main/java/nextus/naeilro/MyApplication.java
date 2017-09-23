@@ -12,7 +12,12 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.kakao.auth.ApiResponseCallback;
+import com.kakao.auth.AuthService;
 import com.kakao.auth.KakaoSDK;
+import com.kakao.auth.network.response.AccessTokenInfoResponse;
+import com.kakao.network.ErrorResult;
+import com.kakao.util.helper.log.Logger;
 
 import nextus.naeilro.adapter.KakaoSDKAdapter;
 import nextus.naeilro.model.Location;
@@ -36,6 +41,7 @@ public class MyApplication extends Application {
     private StorageReference storageReference;
     private FirebaseAnalytics analytics;
     private static Location location;
+    private boolean isLogin = false;
 
     @Override
     public void onCreate()
@@ -131,5 +137,43 @@ public class MyApplication extends Application {
         //super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
         super.attachBaseContext(newBase);
         MultiDex.install(this);
+    }
+
+    public void requestAccessTokenInfo() {
+
+        AuthService.requestAccessTokenInfo(new ApiResponseCallback<AccessTokenInfoResponse>() {
+
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                isLogin = false;
+            }
+
+            @Override
+            public void onNotSignedUp() {
+                // not happened
+                isLogin = false;
+            }
+
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Logger.e("failed to get access token info. msg=" + errorResult);
+                isLogin = false;
+            }
+
+            @Override
+            public void onSuccess(AccessTokenInfoResponse accessTokenInfoResponse) {
+                long userId = accessTokenInfoResponse.getUserId();
+                Logger.d("this access token is for userId=" + userId);
+
+                long expiresInMilis = accessTokenInfoResponse.getExpiresInMillis();
+                Logger.d("this access token expires after " + expiresInMilis + " milliseconds.");
+
+                isLogin = true;
+            }
+        });
+    }
+
+    public boolean isLogin() {
+        return isLogin;
     }
 }

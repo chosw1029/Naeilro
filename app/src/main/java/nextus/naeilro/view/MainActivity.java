@@ -64,8 +64,8 @@ public class MainActivity extends BaseActivity implements BlankFragment.OnFragme
                 // 만약 세션이 유효하지 않은경우
                 if (!Session.getCurrentSession().checkAndImplicitOpen()) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_default);
                 } else {
                     Intent intent = new Intent(MainActivity.this, MyPageActivity.class); //
                     //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

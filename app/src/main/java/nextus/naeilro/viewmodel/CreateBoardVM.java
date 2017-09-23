@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.usermgmt.response.model.UserProfile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,12 +27,14 @@ import retrofit2.Response;
 
 public class CreateBoardVM extends BaseObservable{
 
+    private UserProfile userProfile;
     private Context context;
     public ObservableField<String> comment = new ObservableField<>();
 
     public CreateBoardVM(Context context)
     {
         this.context = context;
+        userProfile = UserProfile.loadFromCache();
     }
 
     public TextWatcher watcher = new TextWatcher() {
@@ -53,13 +56,15 @@ public class CreateBoardVM extends BaseObservable{
         }
     };
 
-    public String getNickName() { return FirebaseAuth.getInstance().getCurrentUser().getDisplayName(); }
+    public String getNickName() { return userProfile.getNickname(); }
 
     public void sendData(View view)
     {
         String  date = new SimpleDateFormat("yyyy/MM/dd HH:mm").format(new Date(System.currentTimeMillis()));
-        String nickname = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String nickname = userProfile.getNickname();
+        String uid = ""+userProfile.getId();
+
+        Log.e("UserProfile", "UID : "+uid+" nickname : "+nickname);
 
         // finally, execute the request
         Call<ResponseBody> call = ContentService.Factory.create().createBoard(uid, nickname, comment.get(), date);
