@@ -53,6 +53,8 @@ dependencies {
     final RETROFIT_VERSION = '2.2.0'
     final OKHTTP_VERSION = '3.6.0'
     final FIREBASE = '11.4.0'
+    final PERMISSON_CHECK = '3.0.1'
+
     compile "com.google.firebase:firebase-crash:$FIREBASE"
     compile "com.google.firebase:firebase-core:$FIREBASE"
     compile "com.google.firebase:firebase-storage:$FIREBASE"
@@ -95,6 +97,11 @@ dependencies {
     //kakao Login api
     compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
+    compile("com.github.hotchemi:permissionsdispatcher:$PERMISSON_CHECK") {
+        // if you don't use android.app.Fragment you can exclude support for them
+        exclude module: "support-v13"
+    }
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSON_CHECK"
 
 
     //compile 'com.tsengvn:typekit:1.0.1'

@@ -1,21 +1,28 @@
 package nextus.naeilro.view;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import nextus.naeilro.R;
 import nextus.naeilro.databinding.ActivityMainBinding;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.RuntimePermissions;
 
+@RuntimePermissions
 public class MainActivity extends BaseActivity implements BlankFragment.OnFragmentInteractionListener, OnTabSelectListener {
 
     FragmentTransaction transaction;
@@ -31,6 +38,27 @@ public class MainActivity extends BaseActivity implements BlankFragment.OnFragme
         transaction.commit();
         binding.bottomBar.setOnTabSelectListener(this);
 
+        MainActivityPermissionsDispatcher.locationTestWithPermissionCheck(MainActivity.this);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // NOTE: delegate the permission handling to generated method
+        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+    void locationTest() {
+        Toast.makeText(this, "Permission Accepted", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
+    void onLocationDenied() {
+        // NOTE: Deal with a denied permission, e.g. by showing specific UI
+        // or disabling certain functionality
+        Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
     }
 
     @Override

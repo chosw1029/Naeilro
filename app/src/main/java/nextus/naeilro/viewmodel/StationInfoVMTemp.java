@@ -120,7 +120,7 @@ public class StationInfoVMTemp extends BaseObservable implements ViewModel {
     public void loadSight()
     {
         url = "locationBasedList?ServiceKey=AYfA0yQD4QNdFo%2FGK9SBlBh%2Fvb7pAk3hWEWZOYspVpY0mfbJbsGjqpZ1wjalXRHbhLqyBNxHVybiDJ%2FrdC5lHw%3D%3D&contentTypeId=12&mapX="+station.getS_mapx()+"&mapY="+station.getS_mapy()
-                +"&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=Q&numOfRows=12&pageNo=1&_type=json";
+                +"&radius=20000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=Q&numOfRows=12&pageNo=1&_type=json";
 
         if (subscription != null && !subscription.isUnsubscribed()) subscription.unsubscribe();
 
@@ -166,7 +166,7 @@ public class StationInfoVMTemp extends BaseObservable implements ViewModel {
     public void loadFood()
     {
         url = "locationBasedList?ServiceKey=AYfA0yQD4QNdFo%2FGK9SBlBh%2Fvb7pAk3hWEWZOYspVpY0mfbJbsGjqpZ1wjalXRHbhLqyBNxHVybiDJ%2FrdC5lHw%3D%3D&contentTypeId=39&mapX="+station.getS_mapx()+"&mapY="+station.getS_mapy()
-                +"&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=Q&numOfRows=12&pageNo=1&_type=json";
+                +"&radius=20000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=Q&numOfRows=12&pageNo=1&_type=json";
 
         if (subscription != null && !subscription.isUnsubscribed()) subscription.unsubscribe();
 
@@ -211,7 +211,7 @@ public class StationInfoVMTemp extends BaseObservable implements ViewModel {
     public void loadTest()
     {
         url = "locationBasedList?ServiceKey=AYfA0yQD4QNdFo%2FGK9SBlBh%2Fvb7pAk3hWEWZOYspVpY0mfbJbsGjqpZ1wjalXRHbhLqyBNxHVybiDJ%2FrdC5lHw%3D%3D&contentTypeId=32&mapX="+station.getS_mapx()+"&mapY="+station.getS_mapy()
-        +"&radius=2000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=Q&numOfRows=12&pageNo=1&_type=json";
+        +"&radius=20000&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=Q&numOfRows=12&pageNo=1&_type=json";
 
         if (subscription != null && !subscription.isUnsubscribed()) subscription.unsubscribe();
 

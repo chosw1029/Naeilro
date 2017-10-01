@@ -89,7 +89,7 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
                 signOutNotification(v);
                 break;
             case R.id.nickNameLayout:
-                showNotification(v);
+                startActivity(new Intent(this, UserInfoSettingActivity.class));
                 break;
 
             case R.id.accountLayout:
